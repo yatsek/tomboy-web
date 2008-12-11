@@ -1,0 +1,18 @@
+Build instruction
+
+- Install maven (see http://maven.apache.org)
+- Checkout this code with 
+
+  svn checkout http://tomboy-web.googlecode.com/svn/trunk/ tomboy-web-read-only
+
+- To test on you local machine:
+
+  cd tomboy-web-read-only
+  mvn jetty:run
+  
+- By default the .tomboy directory in your home directory is used. This can 
+  be changed by editing src/main/webapp/WEB-INF/web.xml context parameter tomboy_dir.
+
+- Make production war file with:
+
+  mvn -Dprod package
