@@ -35,6 +35,7 @@ public class TomboyService {
 	 */
 	public TomboyService(File file) {
 		this.tomboyDir = file;
+		System.out.println("TomboyService.TomboyService() " + file);
 	}
 
 	/**

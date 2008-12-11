@@ -15,11 +15,34 @@ import se.rende.tomboy.TomboyService;
  */
 public class TomboyWebApplication extends WebApplication {
 	private static TomboyWebApplication INSTANCE;
-	private final TomboyService tomboyService;
+	private TomboyService tomboyService;
 
 	public TomboyWebApplication() {
 		INSTANCE = this;
-        tomboyService = new TomboyService(new File(System.getProperty("user.home"), ".tomboy"));
+	}
+	
+	@Override
+	protected void init() {
+		super.init();
+		String tomboyDirString = (String) getServletContext().getInitParameter("tomboy_dir");
+		if (tomboyDirString == null) {
+			tomboyDirString = ".tomboy";
+		}
+        tomboyService = new TomboyService(getRelatedFile(System.getProperty("user.home"), tomboyDirString));
+	}
+
+	/**
+	 * Returns file if it is absolute, or file related to base if not absolute.
+	 * @param base a directory path (absolute or relative)
+	 * @param file a file path
+	 * @return the result path
+	 */
+	private File getRelatedFile(String base, String file) {
+		File path = new File(file);
+		if (path.isAbsolute()) {
+			return path;
+		}
+		return new File(base, path.toString());
 	}
 
 	public Class<NoteListPage> getHomePage() {
