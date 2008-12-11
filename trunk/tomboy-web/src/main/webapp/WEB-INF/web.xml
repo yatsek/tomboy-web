@@ -4,6 +4,12 @@
 	version="2.4">
 
 	<display-name>tomboyweb</display-name>
+	<context-param>
+		<!-- Value is the absolute or relative directory to read notes from. 
+			Relative directory uses home directory as base. -->
+		<param-name>tomboy_dir</param-name>
+		<param-value>.tomboy</param-value>
+	</context-param>
 
 	<!--
 		There are three means to configure Wickets configuration mode and they
